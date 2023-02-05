@@ -7,7 +7,7 @@ ROOT_PATH="ROOT_PATH="/home/user/customers/customer-1/"
 LOG_PATH=$ROOT_PATH"logs/"
 CSV_PATH=$ROOT_PATH"cfg/.csv.example"
 ENV_PATH=$ROOT_PATH"cfg/.env.example"
-REP_PATH=$ROOT_PATH"cfg/esxi-report.j2"
+REP_PATH=$ROOT_PATH"cfg/esxi-getsmart-report.j2"
 
 # Activating the python venv that contains the netbackup script
 source /home/user/python/esxi-getsmart/bin/activate
