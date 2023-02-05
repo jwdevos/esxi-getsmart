@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>ESXi getsmart report for {{ org }} at {{ date }}</title>
+        <meta name="description" content="ESXi getsmart report for {{ org }} at {{ date }}">
+            <style>
+                table, td {
+                    border: 1px solid black;
+                    border-collapse: collapse;
+                    padding: 5px;
+                }
+            </style>
+    </head>
+
+    <body>
+        <h3>ESXi getsmart report for {{ org }} at {{ date }}</h3>
+        <div>
+            {%- for server in servers %}
+            <h4>Server: {{ server }}</h4>
+            {%- for drive in servers[server] %}
+            <h5>Drive Name: {{ drive['Drive Name'] }}</h5>
+            <h5>Drive Type: {{ drive['Drive Type'] }}</h5>
+            <table>
+                <tr>
+                    {%- if drive['Health Status'] == 'OK' %}
+                    <td bgcolor="lawngreen">Health Status</td>
+                    <td bgcolor="lawngreen">OK</td>
+                    {%- endif %}
+                    {%- if drive['Health Status'] == 'Not OK' %}
+                    <td bgcolor="orangered">Health Status</td>
+                    <td bgcolor="orangered">Not OK</td>
+                    {%- endif %}
+                </tr>
+                <tr>
+                    <td bgcolor="lightgray">Drive Temperature (Celcius)</td>
+                    <td bgcolor="lightgray">{{ drive['Drive Temperature (Celcius)'] }}</td>
+                </tr>
+                {%- if drive['Drive Type'] == 'NVME' %}
+                <tr>
+                    <td bgcolor="lightgray">Available Spare (%)</td>
+                    <td bgcolor="lightgray">{{ drive['Available Spare (%)'] }}</td>
+                </tr>
+                <tr>
+                    <td bgcolor="lightgray">Available Spare Threshold (%)</td>
+                    <td bgcolor="lightgray">{{ drive['Available Spare Threshold (%)'] }}</td>
+                </tr>
+                <tr>
+                    <td bgcolor="lightgray">Media Errors</td>
+                    <td bgcolor="lightgray">{{ drive['Media Errors'] }}</td>
+                </tr>
+                <tr>
+                    <td bgcolor="lightgray">NVM Subsystem Reliability Degradation</td>
+                    <td bgcolor="lightgray">{{ drive['NVM Subsystem Reliability Degradation'] }}</td>
+                </tr>
+                <tr>
+                    <td bgcolor="lightgray">Number of Error Info Log Entries</td>
+                    <td bgcolor="lightgray">{{ drive['Number of Error Info Log Entries'] }}</td>
+                </tr>
+                <tr>
+                    <td bgcolor="lightgray">Percentage Used (%)</td>
+                    <td bgcolor="lightgray">{{ drive['Percentage Used (%)'] }}</td>
+                </tr>
+                <tr>
+                    <td bgcolor="lightgray">Unsafe Shutdowns</td>
+                    <td bgcolor="lightgray">{{ drive['Unsafe Shutdowns'] }}</td>
+                </tr>
+                <tr>
+                    <td bgcolor="lightgray">Volatile Memory Backup Device Failure</td>
+                    <td bgcolor="lightgray">{{ drive['Volatile Memory Backup Device Failure'] }}</td>
+                </tr>
+                {%- endif %}
+                {%- if drive['Drive Type'] == 'SATA' %}
+                <tr>
+                    <td bgcolor="lightgray">Media Wearout Indicator</td>
+                    <td bgcolor="lightgray">{{ drive['Media Wearout Indicator'] }}</td>
+                </tr>
+                <tr>
+                    <td bgcolor="lightgray">Reallocated Sector Count</td>
+                    <td bgcolor="lightgray">{{ drive['Reallocated Sector Count'] }}</td>
+                </tr>
+                <tr>
+                    <td bgcolor="lightgray">Write Sectors TOT Count</td>
+                    <td bgcolor="lightgray">{{ drive['Write Sectors TOT Count'] }}</td>
+                </tr>
+                <tr>
+                    <td bgcolor="lightgray">Read Sectors TOT Count</td>
+                    <td bgcolor="lightgray">{{ drive['Read Sectors TOT Count'] }}</td>
+                </tr>
+                <tr>
+                    <td bgcolor="lightgray">Initial Bad Block Count</td>
+                    <td bgcolor="lightgray">{{ drive['Initial Bad Block Count'] }}</td>
+                </tr>
+                <tr>
+                    <td bgcolor="lightgray">Program Fail Count</td>
+                    <td bgcolor="lightgray">{{ drive['Program Fail Count'] }}</td>
+                </tr>
+                <tr>
+                    <td bgcolor="lightgray">Erase Fail Count</td>
+                    <td bgcolor="lightgray">{{ drive['Erase Fail Count'] }}</td>
+                </tr>
+                <tr>
+                    <td bgcolor="lightgray">Uncorrectable Error Count</td>
+                    <td bgcolor="lightgray">{{ drive['Uncorrectable Error Count'] }}</td>
+                </tr>
+                <tr>
+                    <td bgcolor="lightgray">Pending Sector Reallocation Count</td>
+                    <td bgcolor="lightgray">{{ drive['Pending Sector Reallocation Count'] }}</td>
+                </tr>
+                {%- endif %}
+                {%- if drive['Drive Type'] == 'DISK' %}
+                <tr>
+                    <td bgcolor="lightgray">Pending Sector Reallocation Count</td>
+                    <td bgcolor="lightgray">{{ drive['Pending Sector Reallocation Count'] }}</td>
+                </tr>
+                <tr>
+                    <td bgcolor="lightgray">Read Error Count</td>
+                    <td bgcolor="lightgray">{{ drive['Read Error Count'] }}</td>
+                </tr>
+                <tr>
+                    <td bgcolor="lightgray">Reallocated Sector Count</td>
+                    <td bgcolor="lightgray">{{ drive['Reallocated Sector Count'] }}</td>
+                </tr>
+                <tr>
+                    <td bgcolor="lightgray">Sector Reallocation Event Count</td>
+                    <td bgcolor="lightgray">{{ drive['Sector Reallocation Event Count'] }}</td>
+                </tr>
+                <tr>
+                    <td bgcolor="lightgray">Uncorrectable Sector Count</td>
+                    <td bgcolor="lightgray">{{ drive['Uncorrectable Sector Count'] }}</td>
+                </tr>
+                {%- endif %}
+            </table>
+            {%- endfor %}
+            <hr>
+            {%- endfor %}
+        </div>
+    </body>
+</html>
