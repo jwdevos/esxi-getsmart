@@ -1,3 +1,5 @@
+**-- this repo will be archived and moved to https://codeberg.org/jwdevos/esxi-getsmart --**
+
 # esxi-getsmart
 ![Supported Versions](https://img.shields.io/badge/python-3.10+-blue) 
 
